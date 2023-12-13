@@ -32,3 +32,26 @@ class Elevador(object):
             str('\n\t\t\t -- Porta Aberta -- ' if self.getPortaAberta() else '\n\t\t\t -- Porta Fechada -- ')
         )
 
+    def subir(self, andarDesejado):
+        if self.fecharPorta():
+            while andarDesejado > self.andarAtual:
+                self.andarAtual+=1
+                print(f'{self.andarAtual}º andar...')
+            self.setPortaAberta(True)
+        else:
+            print('\nPorta aberta. Excesso de peso!')
+
+
+    def descer(self, andarDesejado):
+        if self.fecharPorta():
+            while andarDesejado < self.andarAtual:
+                self.andarAtual-=1
+                print(f'{self.andarAtual}º andar...')
+            self.setPortaAberta(True)
+        else:
+            print('\nPorta aberta. Excesso de peso!')
+
+    def fecharPorta(self):
+        if self.peso < 750:
+            self.setPortaAberta(False)
+        return not self.getPortaAberta()
